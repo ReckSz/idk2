@@ -1,77 +1,109 @@
 import turtle
+import time
 
-bg = turtle.Screen()
-bg.bgcolor("black")
+# Set up the screen
+screen = turtle.Screen()
+screen.setup(800, 600)
+screen.bgcolor("black")
+screen.title("Happy Birthday!")
 
-turtle.pensize(3)
+# Create a turtle for drawing
+t = turtle.Turtle()
+t.hideturtle()
+t.speed(0)
 
-turtle.hideturtle()
-turtle.penup()
-turtle.goto(-165, -180) 
-turtle.color("white")
-turtle.pendown()
-turtle.forward(330)
+# Function to draw a flower
+def draw_flower(x, y, size, color):
+    t.penup()
+    t.goto(x, y)
+    t.color(color)
+    t.pendown()
+    for _ in range(6):
+        t.circle(size, 60)
+        t.left(120)
+        t.circle(size, 60)
+        t.left(60)
 
-turtle.penup()
-turtle.goto(-155, -150) 
-turtle.color("white")
-turtle.pendown()
-turtle.forward(305)
+# Function to write text with calligraphy-style
+def write_calligraphy(text, x, y, font_size, color):
+    t.penup()
+    t.goto(x, y)
+    t.color(color)
+    t.write(text, align="center", font=("Brush Script MT", font_size, "normal"))
 
-turtle.penup()
-turtle.goto(-145, -120)
-turtle.color("white")
-turtle.pendown()
-turtle.forward(280)
+# Draw border
+t.penup()
+t.goto(-380, 280)
+t.pendown()
+t.pensize(5)
+t.color("goldenrod")
+for _ in range(2):
+    t.forward(760)
+    t.right(90)
+    t.forward(560)
+    t.right(90)
 
-turtle.penup()
-turtle.goto(-95, -100)
-turtle.color("pink")
-turtle.begin_fill()
-turtle.pendown()
-turtle.forward(190)
-turtle.left(90)
-turtle.forward(95)
-turtle.left(90)
-turtle.forward(190)
-turtle.left(90)
-turtle.forward(95)
-turtle.end_fill()
+# Draw flowers
+flower_positions = [(-300, 200), (300, 200), (-300, -200), (300, -200)]
+for x, y in flower_positions:
+    draw_flower(x, y, 30, "rosybrown")
 
-positions = [-75, -25, 25, 75]
-colors = ["red", "blue", "yellow", "green"]
+# Write birthday message
+write_calligraphy("Happy Birthday Saskia", 0, 70, 60, "darkgoldenrod")
 
-for i, pos in enumerate(positions):
-    turtle.penup()
-    turtle.goto(pos, 20)
-    turtle.color(colors[i])
-    turtle.pendown()
-    turtle.forward(20)
+# Draw cake
+t.penup()
+t.goto(-100, -100)
+t.pendown()
+t.color("burlywood")
+t.begin_fill()
+for _ in range(2):
+    t.forward(200)
+    t.left(90)
+    t.forward(100)
+    t.left(90)
+t.end_fill()
 
-for pos in positions:
-    turtle.penup()
-    turtle.goto(pos, 30)
-    turtle.color("red")
-    turtle.pendown()
-    turtle.forward(3)
+# Draw cake topping
+t.penup()
+t.goto(-90, 0)
+t.pendown()
+t.color("peru")
+t.begin_fill()
+for _ in range(2):
+    t.forward(180)
+    t.left(90)
+    t.forward(20)
+    t.left(90)
+t.end_fill()
 
-turtle.penup()
-turtle.goto(10, -60)
-turtle.pendown()
+# Draw candles
+candle_positions = [-60, 0, 60]
+for x in candle_positions:
+    t.penup()
+    t.goto(x, 20)
+    t.pendown()
+    t.color("floralwhite")
+    t.begin_fill()
+    for _ in range(2):
+        t.forward(10)
+        t.left(90)
+        t.forward(30)
+        t.left(90)
+    t.end_fill()
+    
+    # Draw flame
+    t.penup()
+    t.goto(x + 5, 50)
+    t.pendown()
+    t.color("gold")
+    t.begin_fill()
+    t.circle(3)
+    t.end_fill()
 
-circle_colors = ["red", "orange", "brown", "green", "blue", "purple", "grey"]
-for each_color in circle_colors:
-    angle = 360 / len(circle_colors)
-    turtle.color(each_color)
-    turtle.circle(10)
-    turtle.right(angle)
-    turtle.forward(10)
+# Write final message
+write_calligraphy("Semoga Semua Harapannya Terwujud", 0, -150, 36, "saddlebrown")
 
-turtle.penup()
-turtle.goto(-160, 50)
-turtle.color("white")
-turtle.pendown()
-turtle.write("happy birthday to you<3", font=("Poppins", 25, "normal"))
-turtle.color("lightblue")
-
-turtle.done()
+# Hide turtle and keep the window open
+t.hideturtle()
+screen.mainloop()
